@@ -24,7 +24,7 @@ Resumo das principais solicitações feitas aos modelos.
 |---|------|------|------------|----------|------------------|-----------------|---------------------|
 | 1 | 10/10 | Rivânio | Claude | Gradiente e Hessiana do TP6 e do TP12 | Conferindo ∇f e ∇²f das funções que foram calculadas à mão e gerando um .md documentando o resultado | problemas.md | Calculo feito à mão |
 | 2 | 10/10 | Rivânio | Claude | Documentação dos prompts | Gerar um arquivo .md que será usado como teamplate para registar o uso de LLM's | ia-log.md | Documento foi revisado e alterado pelos membros |
-| 3 | | | | | | | |
+| 3 | 12/10 | Rivânio | Calude | Aprimoramento dos testes | Avalie os testes desenvolvidos, adicione outputs no terminal durante a execução e pontue problemas na implementação | testes/__main__.py| Testes foram avaliados e executados, comparando a execução correta |
 | 4 | | | | | | | |
 
 ---
