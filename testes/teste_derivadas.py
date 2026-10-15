@@ -1,10 +1,10 @@
 import numpy as np
 from base import make_phi
-from problemas import TP6, TP12
+from problemas import TP6, TP7, TP12, TP15
 from testes.utils import (checar, grad_numerico, hess_numerica,
                           pontos_de_teste)
 
-PROBLEMAS = [TP6, TP12]
+PROBLEMAS = [TP6, TP7, TP12, TP15]
 
 
 def test_gradiente_vs_diferencas_finitas():
@@ -68,7 +68,8 @@ def test_controle_detecta_gradiente_errado():
         u = x[0]**2 + x[1] - 11
         v = x[0] + x[1]**2 - 7
         return np.array([4 * x[0] * u + 2 * v,
-                         2 * u + 2 * x[1] * v])   # erro plantado: 2*x2*v em vez de 4*x2*v
+                         2 * u + 2 * x[1] * v
+                         ])   # erro plantado: 2*x2*v em vez de 4*x2*v
 
     x = TP12.x0
     g_err, g_num = grad12_errado(x), grad_numerico(TP12.f, x)
