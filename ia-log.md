@@ -12,6 +12,7 @@ Projeto Computacional 1: Modelagem e Busca Linear
 | Ferramenta / modelo | Quem usou | Finalidades principais |
 |---------------------|-----------|------------------------|
 | Claude | Rivânio | Verificação de cálculos e documentação |
+| ChatGPT | Wagner | Verificação de cálculos e documentação |
 | [ex.: GitHub Copilot] | [A / B] | [ex.: autocompletar código] |
 
 ---
@@ -22,10 +23,12 @@ Resumo das principais solicitações feitas aos modelos.
 
 | # | Data | Quem | Ferramenta | Objetivo | Resumo do prompt | Resultado e uso | Como foi verificado |
 |---|------|------|------------|----------|------------------|-----------------|---------------------|
-| 1 | 10/10 | Rivânio | Claude | Gradiente e Hessiana do TP6,TP7,TP12 e TP15 | Conferindo ∇f e ∇²f das funções que foram calculadas à mão e gerando um .md documentando o resultado | problemas.md | Calculo feito à mão |
+| 1 | 10/10 | Rivânio | Claude | Gradiente e Hessiana do TP6,TP12 | Conferindo ∇f e ∇²f das funções que foram calculadas à mão e gerando um .md documentando o resultado | problemas.md | Calculo feito à mão |
 | 2 | 10/10 | Rivânio | Claude | Documentação dos prompts | Gerar um arquivo .md que será usado como teamplate para registar o uso de LLM's | ia-log.md | Documento foi revisado e alterado pelos membros |
 | 3 | 12/10 | Rivânio | Calude | Aprimoramento dos testes | Avalie os testes desenvolvidos, adicione outputs no terminal durante a execução e pontue problemas na implementação | testes/__main__.py| Testes foram avaliados e executados, comparando a execução correta |
-| 4 | | | | | | | |
+| 4 | 13/10 | Wagner | ChatGPT | Verificação e tradução dos cálculos do gradiente e da Hessiana | Verificação dos cálculos feitos a mão dos gradientes e das hesssianas do TP7 e o TP15 e tradução das expressões matemáticas para código python| problemas.py | cálculos verificados à mão
+| 5 | 13/10 | Wagner | ChatGPT | Verificação de convexidade das funções e se as hessianas eram definidas positivas | Verificação das contas feitas à mão que checavam se as funções eram convexas e se as matrizes hessianas eram definidas positivas| problemas.md | cálculos verificados à mão
+| 6 | | | | | | | |
 
 ---
 
@@ -88,4 +91,4 @@ Parágrafo curto e honesto sobre o que a IA ajudou, onde atrapalhou e o que a du
 | Integrante | Principais usos de IA | Principais verificações feitas |
 |------------|----------------------|--------------------------------|
 | José Rivânio | | |
-| Pedro Wagner | | |
+| Pedro Wagner | Uso de IA para verificar corretude de cálculos extensos | Verificação de cálculos de gradientes e hessianas, de complexidade e de autovalores|
