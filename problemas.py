@@ -100,31 +100,43 @@ TP12 = Problema(
 
 # ---- TP15 ----
 def f15(x):
-  a = 10 * (x[0] - x[1] ** 2) ** 2 + (x[0] - 1) ** 2
-  return a ** (1 / 4)
+    a = 10 * (x[0] - x[1]**2)**2 + (x[0] - 1)**2
+    return a**(1 / 4)
 
 
 def grad15(x):
-  y = x[1]
-  a = 10 * (x[0] - y**2) ** 2 + (x[0] - 1) ** 2
+    x1, x2 = x
 
-  da_dx1 = 20 * (x[0] - y**2) + 2 * (x[0] - 1)
-  da_dx2 = -40 * y * (x[0] - y**2)
+    a = 10 * (x1 - x2**2)**2 + (x1 - 1)**2
 
-  return np.array([(1 / 4) * a ** (-3 / 4) * da_dx1, (1 / 4) * a ** (-3 / 4) * da_dx2])
+    da_dx1 = 20 * (x1 - x2**2) + 2 * (x1 - 1)
+    da_dx2 = -40 * x2 * (x1 - x2**2)
+
+    return np.array([
+        (1 / 4) * a**(-3 / 4) * da_dx1,
+        (1 / 4) * a**(-3 / 4) * da_dx2
+    ])
 
 
 def hess15(x):
-  x1, x2 = x
-  a = 10 * (x1 - x2**2) ** 2 + (x1 - 1) ** 2
+    x1, x2 = x
 
-  grad_a = np.array([20 * (x1 - x2**2) + 2 * (x1 - 1), -40 * x2 * (x1 - x2**2)])
+    a = 10 * (x1 - x2**2)**2 + (x1 - 1)**2
 
-  hess_a = np.array([[22, -40 * x2], [-40 * x2, 120 * x2**2 - 40 * x1]])
+    grad_a = np.array([
+        20 * (x1 - x2**2) + 2 * (x1 - 1),
+        -40 * x2 * (x1 - x2**2)
+    ])
 
-  return (1 / 4) * a ** (-3 / 4) * hess_a - (3 / 16) * a ** (-7 / 4) * np.outer(
-      grad_a, grad_a
-  )
+    hess_a = np.array([
+        [22, -40 * x2],
+        [-40 * x2, 120 * x2**2 - 40 * x1]
+    ])
+
+    return (
+        (1 / 4) * a**(-3 / 4) * hess_a
+        - (3 / 16) * a**(-7 / 4) * np.outer(grad_a, grad_a)
+    )
 
 
 TP15 = Problema(
