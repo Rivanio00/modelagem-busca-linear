@@ -14,6 +14,7 @@ MODULOS = [
     "testes.teste_phi",
     "testes.teste_direcoes",
     "testes.teste_derivadas",
+    "testes.teste_fibonacci",
 ]
 
 
