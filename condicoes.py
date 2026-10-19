@@ -8,10 +8,10 @@ def armijo(
     grad,
     d,
     hess,
-    alpha0: float = 1.0,
-    rho: float = 0.5,
-    c: float = 1e-4,
-    limit: int = 100,
+    alpha0: float,
+    rho: float,
+    c: float,
+    limit: int,
 ):
     alpha = alpha0
     fx = p.f(x)
@@ -59,64 +59,118 @@ def condicoes_wolfe(
 
     return armijo, curvatura
 
+def condicoes_goldstein(
+    p: Problema,
+    x,
+    grad,
+    d,
+    alpha: float,
+    sigma1: float = 1e-4,
+    sigma2: float = 0.9,
+):
+    fx = p.f(x)
+    f_novo = p.f(x + alpha * d)
+    grad_d = np.dot(grad, d)
 
-def wolfe(
+    inferior = fx + sigma2 * alpha * grad_d
+    superior = fx + sigma1 * alpha * grad_d
+
+    return inferior <= f_novo <= superior
+
+
+def busca_passo_wolfe_goldstein(
     p: Problema,
     x,
     grad,
     d,
     hess,
-    alpha0: float = 1.0,
-    sigma1: float = 1e-4,
-    sigma2: float = 0.9,
-    limit: int = 100,
-    alpha_max: float = 1e6,
+    condicao: str,
+    alpha0: float,
+    sigma1: float,
+    sigma2: float,
+    limit: int,
+    alpha_max: float,
 ):
-    # Garantir que d seja uma direção de descida
+    if not (0 < sigma1 < sigma2 < 1):
+        raise ValueError("É necessário 0 < sigma1 < sigma2 < 1.")
+
+    if condicao not in ("wolfe", "goldstein"):
+        raise ValueError("Use 'wolfe' ou 'goldstein'.")
+
     if np.dot(grad, d) >= 0:
         d = dir_gradiente(grad, hess)
 
-    if np.dot(grad, d) >= 0:
-        raise ValueError(
-            "Não foi possível obter uma direção de descida."
-        )
+    grad_d = np.dot(grad, d)
 
-    # Limites do intervalo de busca
+    if grad_d >= 0:
+        raise ValueError("Não foi possível obter uma direção de descida.")
+
+    fx = p.f(x)
     alpha_til = 0.0
     alpha_hat = None
-
     alpha = alpha0
 
     for _ in range(limit):
-        armijo, curvatura = condicoes_wolfe(
-            p, x, grad, d, alpha, sigma1, sigma2
-        )
+        x_novo = x + alpha * d
+        f_novo = p.f(x_novo)
 
-        # Passo 1: ambas as condições foram satisfeitas
-        if armijo and curvatura:
-            return alpha, d
+        if condicao == "wolfe":
+            armijo = f_novo <= fx + sigma1 * alpha * grad_d
+            curvatura = (
+                np.dot(p.grad(x_novo), d) >= sigma2 * grad_d
+            )
 
-        # Passo 2: Armijo foi violada; definir limite superior
-        if not armijo:
-            alpha_hat = alpha
+            if armijo and curvatura:
+                return alpha, d
 
-        # Passo 3: curvatura foi violada; definir limite inferior
-        elif not curvatura:
-            alpha_til = alpha
+            if not armijo:
+                alpha_hat = alpha
+            else:
+                alpha_til = alpha
 
-        # Passo 4: extrapolação
+        else:  # Goldstein
+            inferior = fx + sigma2 * alpha * grad_d
+            superior = fx + sigma1 * alpha * grad_d
+
+            if inferior <= f_novo <= superior:
+                return alpha, d
+
+            if f_novo < inferior:
+                # Passo pequeno demais: extrapolar
+                alpha_til = alpha
+            else:
+                # Passo grande demais: reduzir o intervalo
+                alpha_hat = alpha
+
         if alpha_hat is None:
-            alpha = 2 * alpha
+            alpha = min(2 * alpha, alpha_max)
 
-            if alpha > alpha_max:
+            if alpha >= alpha_max:
                 raise RuntimeError(
-                    "A busca de Wolfe excedeu alpha_max."
+                    "A busca atingiu alpha_max sem encontrar um passo válido."
                 )
-
-        # Passo 5: interpolação
         else:
             alpha = (alpha_til + alpha_hat) / 2
 
     raise RuntimeError(
-        "A busca de Wolfe não encontrou um passo válido."
+        f"A busca de passo ({condicao}) não encontrou um passo válido."
     )
+
+def achar_passo(p: Problema,
+    x,
+    grad,
+    d,
+    hess,
+    condicao: str,
+    alpha0: float,
+    rho: float,
+    c: float,
+    sigma1: float,
+    sigma2: float,
+    limit: int,
+    alpha_max: float):
+
+    if condicao == "armijo":
+        return armijo(p, x, grad, d, hess, alpha0, rho, c, limit)
+    else:
+        return busca_passo_wolfe_goldstein(p, x, grad, d, hess, condicao, alpha0, sigma1, sigma2, limit, alpha_max)
