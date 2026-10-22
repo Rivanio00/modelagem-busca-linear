@@ -67,15 +67,13 @@ def busca_iterativa(
         i += 1
 
     if np.all(np.abs(grad) <= e):
-        print(f"Newton convergiu para o problema {p.nome}!")
+        print(f"Convergiu para o problema {p.nome}!")
         print(f"Número de Iterações: {i}")
     else:
-        print("Newton atingiu limite de iterações!")
+        print("Atingiu limite de iterações!")
 
     print(f"Coordenadas encontradas {x}")
     print(f"Valor da função: {p.f(x):.3f}")
     print(f"Gradiente: {grad}")
 
     return x
-
-busca_iterativa(TP15, direcao_inicial="gradiente", condicao_passo="goldstein")
