@@ -78,4 +78,4 @@ def busca_iterativa(
 
     return x
 
-busca_iterativa(TP15, direcao_inicial="gradiente")
+busca_iterativa(TP15, direcao_inicial="gradiente", condicao_passo="goldstein")
