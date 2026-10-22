@@ -30,6 +30,8 @@ Resumo das principais solicitações feitas aos modelos.
 | 5 | 13/10 | Wagner | ChatGPT | Verificação de convexidade das funções e se as hessianas eram definidas positivas | Verificação das contas feitas à mão que checavam se as funções eram convexas e se as matrizes hessianas eram definidas positivas| problemas.md | cálculos verificados à mão
 | 6 | 16/10 | Wagner | ChatGPT | Correção do uso de backtracking para a condição de armijo | Correção do código usando backtracking para achar um passo que satisfaça a condição de armijo | condicoes.py | Código base feito manualmente
 | 7 | 17/10 | Wagner | ChatGPT | Compleção do código da condição de Wolfe | Complementação do código base já feito para achar um tamanho de passo usando as condições de wolfe | as funções Wolfe e condicoes_wolfe | Código base feito manualmente |
+| 8 | 21/10 | Rivânio | Claude | Desenvolvimento do Critério de Kelly(mdoelagem de problema prático) | Desenvolvimento de documentação, formulação a partir de fontes(rerenciadas em Kelly_bet.md) e cálculos de Gradiente e Hessiana  | Kelly_bet.md | Pesquisa Bibliográfica |
+| 9 | 21/10 | Rivânio | Claude | Organização do código e do output no terminal | Aprimorar o código em kelly_bet.py, adicionando mais comentários e organizando a etapa final de output no terminal | kelly_bet.py | Comparando resultados com cálculo analítico |
 
 ---
 
