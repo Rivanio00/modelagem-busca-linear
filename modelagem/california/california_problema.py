@@ -12,7 +12,23 @@ from condicoes import armijo
 # 1. CARREGAMENTO E PREPARAÇÃO DOS DADOS
 # ============================================================
 
-data = np.genfromtxt("housing.csv", delimiter=",", dtype=float)
+# Define o caminho do CSV na mesma pasta deste arquivo .py
+DATA_DIR = Path(__file__).resolve().parent
+csv_path = DATA_DIR / "housing.csv"
+
+if not csv_path.is_file():
+  print("\n" + "=" * 75)
+  print("[AVISO] O arquivo 'housing.csv' não foi encontrado!")
+  print(
+      "Lembre-se de baixar o arquivo CSV pelo link disponibilizado no PNL_modelagem_trabalho.pdf"
+  )
+  print(
+      f"e salvá-lo nesta mesma pasta para poder rodar a modelagem!"
+  )
+  print("=" * 75 + "\n")
+  sys.exit(1)
+
+data = np.genfromtxt(csv_path, delimiter=",", dtype=float, skip_header=1)
 
 R = data[:, 7]  # Variável independente
 V = data[:, 8]  # Variável dependente
