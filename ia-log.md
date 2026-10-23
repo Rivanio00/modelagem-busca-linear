@@ -32,7 +32,7 @@ Resumo das principais solicitações feitas aos modelos.
 | 7 | 17/10 | Wagner | ChatGPT | Compleção do código da condição de Wolfe | Complementação do código base já feito para achar um tamanho de passo usando as condições de wolfe | as funções Wolfe e condicoes_wolfe | Código base feito manualmente |
 | 8 | 21/10 | Rivânio | Claude | Desenvolvimento do Critério de Kelly(mdoelagem de problema prático) | Desenvolvimento de documentação, formulação a partir de fontes(rerenciadas em Kelly_bet.md) e cálculos de Gradiente e Hessiana  | Kelly_bet.md | Pesquisa Bibliográfica |
 | 9 | 21/10 | Rivânio | Claude | Organização do código e do output no terminal | Aprimorar o código em kelly_bet.py, adicionando mais comentários e organizando a etapa final de output no terminal | kelly_bet.py | Comparando resultados com cálculo analítico |
-
+| 10 | 22/10 | Rivânio | Claude | Organizar os resultados dos experimentos em um .md | Ao final da execução de experimentos.py salvar os resultados num markdown, organizado em uma tabela| tabela_36_experimentos.md | Verificando com a saída do terminal |
 ---
 
 ## 3. Auditoria crítica de erros
