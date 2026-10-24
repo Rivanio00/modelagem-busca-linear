@@ -31,6 +31,10 @@ Este repositório contém a implementação, validação e análise computaciona
 │       └── kelly_bet.py      # Execução do 1º passo e interpretação financeira
 └── tabela_36_experimentos.md # Tabela consolidada dos 36 casos de teste
 ```
+---
+## Documentação
+
+### Na pasta /docs organizamos a documentação de  desenvovimento do projeto de resultados!
 
 ---
 
@@ -55,7 +59,7 @@ source .venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
 ```
 
-### 3. Executar a Aplicação Prática (Critério de Kelly)
+### 3.1 Executar a Aplicação Prática (Critério de Kelly)
 
 Para rodar a simulação do 1º passo de alocação de capital e visualizar a interpretação financeira dos resultados:
 
@@ -63,7 +67,15 @@ Para rodar a simulação do 1º passo de alocação de capital e visualizar a in
 python modelagem/kelly_bet/kelly_bet.py
 ```
 
-### 3. Executar a Bateria dos 36 Experimentos
+### 3.2 Executar a Aplicação Prática (California Housing Prices)
+
+Para rodar a simulação do 1º passo que estima o valor médio de uma vizinhança a interpretação dos resultados:
+
+```bash
+python modelagem/california/california_problema.py
+```
+
+### 3.3 Executar a Bateria dos 36 Experimentos
 
 Para rodar a combinação dos $4 \text{ Problemas} \times 3 \text{ Direções} \times 3 \text{ Métodos 1D}$ e gerar a tabela consolidada:
 
