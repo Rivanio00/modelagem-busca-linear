@@ -35,7 +35,7 @@ Minimiza-se o erro quadrático $f(\mathbf{W}) = \frac{1}{2}\sum_{i=1}^{N}(V_i - 
 
 * **Resultado:** redução de $62{,}83\%$ no 1º passo, com $\alpha = 3{,}81 \times 10^{-6}$.
 * **Escala:** $\|\nabla f(\mathbf{W}_0)\| = 2{,}01 \times 10^{10}$, porque os dados não estão normalizados. O passo coincide com $2^{-18}$, compatível com 18 reduções pela metade no backtracking a partir de $\alpha_0 = 1$. A padronização das variáveis melhoraria muito o condicionamento.
-* **Alcance:** este é só o 1º passo; o resultado mostra que o método reduz $f$, não que $\mathbf{W}_1$ esteja perto do ótimo.
+- **Alcance:** este é apenas o 1º passo; o resultado mostra que o método reduz \(f\), mas não que \(\mathbf{W}_1\) esteja perto do ótimo. Como a hessiana é constante e definida positiva em todo o domínio, a função objetivo é estritamente convexa e possui um único ótimo global. Assim, sob as condições usuais de convergência do método de Newton com busca de Armijo, as iterações convergem para esse ótimo global.
 
 ---
 
