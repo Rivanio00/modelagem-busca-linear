@@ -30,7 +30,9 @@ Resumo das principais solicitações feitas aos modelos.
 | 7 | 17/10 | Wagner | ChatGPT | Compleção do código da condição de Wolfe | Complementação do código base já feito para achar um tamanho de passo usando as condições de wolfe | as funções Wolfe e condicoes_wolfe | Código base feito manualmente |
 | 8 | 21/10 | Rivânio | Claude | Desenvolvimento do Critério de Kelly(mdoelagem de problema prático) | Desenvolvimento de documentação, formulação a partir de fontes(rerenciadas em Kelly_bet.md) e cálculos de Gradiente e Hessiana  | Kelly_bet.md | Pesquisa Bibliográfica |
 | 9 | 21/10 | Rivânio | Claude | Organização do código e do output no terminal | Aprimorar o código em kelly_bet.py, adicionando mais comentários e organizando a etapa final de output no terminal | kelly_bet.py | Comparando resultados com cálculo analítico |
-| 10 | 22/10 | Rivânio | Claude | Organizar os resultados dos experimentos em um .md | Ao final da execução de experimentos.py salvar os resultados num markdown, organizado em uma tabela| tabela_36_experimentos.md | Verificando com a saída do terminal |
+| 10 | 21/10 | Wagner | ChatGPT | Verificação da derivação da função objetivo da regressão linear | Verificação dos cálculos e da derivação da função objetivo do problema de regressão linar, usando máxima verossimilhança gaussiana  | .PNL_modelagem_trabalho.pdf | Cálculos verificados na mão |
+| 11 | 21/10 | Wagner | ChatGPT | Organização de código da última etapa | Aprimorar o código em california_problema.py, adicionando mais comentários e organizando a etapa final de output no terminal | california_problema.py | Comparando os resultados com código manualmente feito anteriormente |
+| 12 | 22/10 | Rivânio | Claude | Organizar os resultados dos experimentos em um .md | Ao final da execução de experimentos.py salvar os resultados num markdown, organizado em uma tabela| tabela_36_experimentos.md | Verificando com a saída do terminal |
 ---
 
 ## 3. Auditoria crítica de erros
@@ -93,6 +95,91 @@ A correção exigiu duas etapas: tratar a leitura do cabeçalho no código de E/
 **Verificação após a correção:**
 
 Após a inclusão de `skip_header=1` e do ajuste de escala, o script executou sem exceções. O gradiente $\nabla f(W_0)$ passou a ser numérico e bem-condicionado, e a busca de Armijo encontrou um passo válido $\alpha = 0{,}001$ logo na 1ª iteração, reduzindo a função de custo $f(W_0)$ de $1256{,}00$ para $136{,}12$ ($89{,}16\%$ de redução).
+
+### Erro 2: Derivação incorreta da função de custo gaussiana por omissão do fator \(1/2\)
+
+- **Integrante que identificou:** Wagner
+- **Contexto:** Dedução da função de custo a partir da verossimilhança gaussiana para o problema de regressão linear simples, seguida do cálculo do gradiente e da Hessiana utilizados no método de Newton com busca linear.
+- **Tipo de erro:** `[ ]` Formulação matemática  `[X]` Derivada  `[ ]` Bug de implementação  `[ ]` Violação de descida  `[X]` Outro: Inconsistência na função objetivo e alteração do comportamento de convergência do método de otimização.
+
+**O que o modelo produziu:**
+
+Ao derivar a função de custo a partir da verossimilhança gaussiana, a LLM desconsiderou o fator constante \(1/2\) que multiplicava a soma dos erros quadráticos. Para os resíduos definidos por \(u_i(W)=v_i-w_0-w_1r_i\), a função objetivo correta, desconsiderando termos constantes independentes de \(W\), é:
+
+\[
+f(W)=\frac{1}{2}\sum_{i=1}^{n}
+(v_i-w_0-w_1r_i)^2.
+\]
+
+Entretanto, a derivação apresentada pela LLM correspondeu à função:
+
+\[
+\widetilde{f}(W)=\sum_{i=1}^{n}
+(v_i-w_0-w_1r_i)^2.
+\]
+
+Consequentemente, as expressões obtidas para o gradiente e a Hessiana também ficaram incorretas em relação à função objetivo originalmente definida:
+
+\[
+\nabla \widetilde{f}(W)=2\nabla f(W),
+\]
+
+\[
+\nabla^2\widetilde{f}(W)=2\nabla^2 f(W).
+\]
+
+**Por que está errado:**
+
+O fator \(1/2\) não pode ser omitido durante a derivação sem que a função objetivo seja explicitamente redefinida e as consequências dessa alteração sejam consideradas. Embora multiplicar uma função por uma constante positiva preserve seus minimizadores e sua convexidade, isso não significa que as expressões da função, do gradiente e da Hessiana permaneçam iguais.
+
+Nesse caso, a LLM produziu derivadas correspondentes a uma função de custo diferente daquela estabelecida na modelagem. Isso comprometeu a consistência matemática entre a função objetivo implementada e as derivadas utilizadas pelo algoritmo de otimização.
+
+Além disso, a alteração pode afetar o comportamento de convergência do método, especialmente quando se utiliza uma busca linear com condições de aceitação de passo, como Armijo, Wolfe ou Goldstein, pois essas condições dependem dos valores da função objetivo e de suas derivadas. A utilização de expressões incompatíveis entre si pode levar a avaliações incorretas dos passos candidatos e prejudicar o funcionamento esperado do algoritmo.
+
+**Como foi detectado:**
+
+O erro foi identificado por Wagner durante a revisão matemática da modelagem. Ao refazer manualmente os cálculos das derivadas parciais, do gradiente e da Hessiana, ele percebeu que os resultados apresentados pela LLM continham um fator multiplicativo \(2\) em relação às expressões corretas. A divergência foi rastreada até a omissão do fator \(1/2\) na função de custo derivada da verossimilhança gaussiana.
+
+**Correção analítica:**
+
+A correção consistiu em retomar a função objetivo com o fator \(1/2\) e recalcular manualmente o gradiente e a Hessiana, garantindo a correspondência entre a função minimizada e suas derivadas.
+
+1. **Função objetivo corrigida:**
+
+   \[
+   f(W)=\frac{1}{2}\sum_{i=1}^{n}
+   (v_i-w_0-w_1r_i)^2.
+   \]
+
+2. **Gradiente corrigido:**
+
+   Definindo \(u_i(W)=v_i-w_0-w_1r_i\), obtém-se:
+
+   \[
+   \nabla f(W)=
+   \begin{bmatrix}
+   -\displaystyle\sum_{i=1}^{n}u_i(W)\\[6pt]
+   -\displaystyle\sum_{i=1}^{n}r_i u_i(W)
+   \end{bmatrix}.
+   \]
+
+3. **Hessiana corrigida:**
+
+   \[
+   \nabla^2 f(W)=
+   \begin{bmatrix}
+   n & \displaystyle\sum_{i=1}^{n}r_i\\[6pt]
+   \displaystyle\sum_{i=1}^{n}r_i &
+   \displaystyle\sum_{i=1}^{n}r_i^2
+   \end{bmatrix}.
+   \]
+
+**Verificação após a correção:**
+
+Após a revisão manual, a função objetivo, o gradiente e a Hessiana passaram a ser matematicamente consistentes entre si. A Hessiana corrigida é semidefinida positiva, sendo definida positiva quando as variáveis independentes apresentam variabilidade suficiente para que as duas colunas da matriz de projeto sejam linearmente independentes. Portanto, a função de mínimos quadrados permanece convexa.
+
+A correção também restabeleceu a formulação pretendida para o método de Newton e sua busca linear. É importante observar que, se o fator \(2\) tivesse sido aplicado uniformemente à função, ao gradiente e à Hessiana, o passo puro de Newton seria matematicamente invariável, pois o fator se cancelaria em \(-(\nabla^2 f)^{-1}\nabla f\). O problema identificado foi a inconsistência da derivação em relação à função objetivo definida, que poderia afetar a busca linear caso as expressões incorretas fossem utilizadas de maneira incompatível na implementação.
+
 
 ---
 

@@ -5,7 +5,7 @@ O objetivo deste projeto computacional é integrar a modelagem de problemas reai
 
 # Projeto Computacional - Otimização Não Linear (PNL)
 
-Este repositório contém a implementação, validação e análise computacional de métodos de otimização irrestrita e busca linear 1D, aplicados tanto a funções de teste teóricas (TP6, TP7, TP12 e TP15) quanto a um problema de modelagem prática do mundo real baseado no **Critério de Kelly** para alocação de ativos.
+Este repositório contém a implementação, validação e análise computacional de métodos de otimização irrestrita e busca linear 1D, aplicados tanto a funções de teste teóricas (TP6, TP7, TP12 e TP15) quanto a um problema de modelagem prática do mundo real baseado no **Critério de Kelly** para alocação de ativos e um problema de regressão linear baseado no dataset california_housing usando de **maximização de uma verossimilhança gaussiana**.
 
 ---
 
@@ -29,6 +29,10 @@ Este repositório contém a implementação, validação e análise computaciona
 │   └── kelly_bet/
 │       ├── Kelly_bet.md      # Dedução teórica, gradiente, Hessiana, convexidade e referências
 │       └── kelly_bet.py      # Execução do 1º passo e interpretação financeira
+│   └── california/
+│       ├── PNL_modelagem_trabalho.pdf      # Dedução teórica, gradiente, Hessiana, convexidade e relatório da execução do primeiro passo.
+│       └── california_problema.py      # Execução do 1º passo e relatório detalhado.
+│       └── housing.csv     # dataset usado na modelagem.
 └── tabela_36_experimentos.md # Tabela consolidada dos 36 casos de teste
 ```
 ---
@@ -89,13 +93,14 @@ python experimentos.py
 
 | Tarefa | José Rivânio | Pedro Wagner | Detalhes / Observações |
 | :--- | :---: | :---: | :--- |
-| **Modelagem Teórica & Derivadas** | X | X | Modelagem dos problemas TP6, TP7, TP12, TP15 e Critério de Kelly. |
+| **Modelagem Teórica & Derivadas** | X | X | Modelagem dos problemas TP6, TP7, TP12, TP15, Critério de Kelly e Regressão Linear. |
 | **Implementação de Direções de Busca** | X |   | Métodos do Gradiente ($d_G$), Newton ($d_N$) e Newton Modificado ($d_M$). |
 | **Busca Linear 1D — Fibonacci** | X |   | Algoritmo de cercamento de intervalo e redução via sequência de Fibonacci. |
 | **Busca Linear 1D — Newton 1D** |   | X | Método exato utilizando 1ª e 2ª derivadas de $\varphi(\alpha)$ |
 | **Busca Linear 1D — Goldstein** |   | X | Condições de decréscimo suficiente e canalização com contagem de iterações. |
 | **Script dos 36 Experimentos** | X | X | Integração da matriz $4 \times 3 \times 3$ e exportação da tabela em Markdown. |
 | **Modelagem Prática (Critério de Kelly)** | X |   | Formulação do problema real de alocação de ativos e script `kelly_bet.py`. |
+| **Modelagem Prática (Regressão Linear)** |  | X | Formulação do problema de regressão linear com dados reais e script `california_problema.py`. |
 | **Estruturação do Repositório & Módulos** | X |   | Configuração de pastas (`busca_linear/`, `modelagem/`), imports e `requirements.txt`. |
 | **Redação do Relatório Técnico** | X | X | Análise dos resultados, gráficos, tabelas e apêndice de IA. |
 | **Revisão e Formatação Final** | X | X | Teste de reproduzibilidade do zero e compilação do documento. |
