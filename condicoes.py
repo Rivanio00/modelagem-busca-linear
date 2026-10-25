@@ -110,7 +110,7 @@ def busca_passo_wolfe_goldstein(
     alpha_hat = None
     alpha = alpha0
 
-    for _ in range(limit):
+    for k in range(limit):
         x_novo = x + alpha * d
         f_novo = p.f(x_novo)
 
@@ -121,7 +121,7 @@ def busca_passo_wolfe_goldstein(
             )
 
             if armijo and curvatura:
-                return alpha, d
+                return alpha, d, (k+1)
 
             if not armijo:
                 alpha_hat = alpha
@@ -133,7 +133,7 @@ def busca_passo_wolfe_goldstein(
             superior = fx + sigma1 * alpha * grad_d
 
             if inferior <= f_novo <= superior:
-                return alpha, d
+                return alpha, d, (k+1)
 
             if f_novo < inferior:
                 # Passo pequeno demais: extrapolar
