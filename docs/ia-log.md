@@ -22,7 +22,7 @@ Resumo das principais solicitações feitas aos modelos.
 | # | Data | Quem | Ferramenta | Objetivo | Resumo do prompt | Resultado e uso | Como foi verificado |
 |---|------|------|------------|----------|------------------|-----------------|---------------------|
 | 1 | 14/11 | Rivânio | Gemini | Atualizar experimentos.py | Atualizar os experimentos, chamando os métodos do Gradiente e SR1, utilizando o experimentos.py do trabalho anterior como estrutura base | experimentos.py | Executando código e validando resultados dos métodos |
-| 2 | /11 | Wagner | ChatGPT | Verificação e tradução dos cálculos do gradiente e da Hessiana | Verificação dos cálculos feitos a mão dos gradientes e das hesssianas do TP7 e o TP15 e tradução das expressões matemáticas para código python| problemas.py | cálculos verificados à mão
+| 2 | 14/11 | Rivânio | Gemini | Atualizando README.md utilizando o anterior como estrutura base | Enviei o arquivo anterior, referente ao trabalho 1 e pedi pra atualizar seguindo as especificações do novo trabalho | README.md | Verificado pelos dois membros
 ---
 
 ## 3. Auditoria crítica de erros
