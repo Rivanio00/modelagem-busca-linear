@@ -1,6 +1,6 @@
 # Apêndice: Auditoria de Uso de Inteligência Artificial
 
-Projeto Computacional 1: Modelagem e Busca Linear
+Projeto Computacional 2: Resolução de problemas irrestritos com métodos de otimização multidimensionais
 ---
 
 ## 1. Visão geral do uso
@@ -10,7 +10,7 @@ Projeto Computacional 1: Modelagem e Busca Linear
 
 | Ferramenta / modelo | Quem usou | Finalidades principais |
 |---------------------|-----------|------------------------|
-| Claude | Rivânio | Verificação de cálculos e documentação |
+| Gemini | Rivânio | Verificação de cálculos e documentação |
 | ChatGPT | Wagner | Verificação de cálculos e documentação |
 
 ---
@@ -21,8 +21,8 @@ Resumo das principais solicitações feitas aos modelos.
 
 | # | Data | Quem | Ferramenta | Objetivo | Resumo do prompt | Resultado e uso | Como foi verificado |
 |---|------|------|------------|----------|------------------|-----------------|---------------------|
-| 1 | 10/10 | Rivânio | Claude | Gradiente e Hessiana do TP6,TP12 | Conferindo ∇f e ∇²f das funções que foram calculadas à mão e gerando um .md documentando o resultado | problemas.md | Calculo feito à mão |
-| 2 | 13/10 | Wagner | ChatGPT | Verificação e tradução dos cálculos do gradiente e da Hessiana | Verificação dos cálculos feitos a mão dos gradientes e das hesssianas do TP7 e o TP15 e tradução das expressões matemáticas para código python| problemas.py | cálculos verificados à mão
+| 1 | 14/11 | Rivânio | Gemini | Atualizar experimentos.py | Atualizar os experimentos, chamando os métodos do Gradiente e SR1, utilizando o experimentos.py do trabalho anterior como estrutura base | experimentos.py | Executando código e validando resultados dos métodos |
+| 2 | /11 | Wagner | ChatGPT | Verificação e tradução dos cálculos do gradiente e da Hessiana | Verificação dos cálculos feitos a mão dos gradientes e das hesssianas do TP7 e o TP15 e tradução das expressões matemáticas para código python| problemas.py | cálculos verificados à mão
 ---
 
 ## 3. Auditoria crítica de erros
