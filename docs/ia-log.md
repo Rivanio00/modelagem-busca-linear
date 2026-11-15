@@ -23,6 +23,8 @@ Resumo das principais solicitações feitas aos modelos.
 |---|------|------|------------|----------|------------------|-----------------|---------------------|
 | 1 | 14/11 | Rivânio | Gemini | Atualizar experimentos.py | Atualizar os experimentos, chamando os métodos do Gradiente e SR1, utilizando o experimentos.py do trabalho anterior como estrutura base | experimentos.py | Executando código e validando resultados dos métodos |
 | 2 | 14/11 | Rivânio | Gemini | Atualizando README.md utilizando o anterior como estrutura base | Enviei o arquivo anterior, referente ao trabalho 1 e pedi pra atualizar seguindo as especificações do novo trabalho | README.md | Verificado pelos dois membros
+| 3 | 15/11 | Rivânio | Gemini | Atualizando conclusao.md utilizando o anterior como estrutura base | Enviei o arquivo anterior, referente ao trabalho 1 e solicitei uma nova estrutura seguindo o que foi pedido nas especificações do trabalho | conclusao.md | Verificado e preenchido pelos membros com os resultados
+| 4 | 15/11 | Rivânio | Gemini | Organizar o manual de uso para adaptações | Desenvolver um manual de uso para adicionar novos testes e alterar existentes | manual_de_uso.md | Corrigido com base no uso nos algoritmos
 ---
 
 ## 3. Auditoria crítica de erros
@@ -173,13 +175,7 @@ A correção também restabeleceu a formulação pretendida para o método de Ne
 
 ---
 
-## 4. Reflexão sobre o uso de IA
-
-O uso de LLM's acelerou bastante a realização do trabalho e a execuções de tarefas repetitivas, como um exemplo o desenvovimento de problemas.md que seria bem trabalhoso de realizar devido a sua formatação e organização, todos os arquivos de documentação ou são gerados por LLM e sofrem alterações ou são gerados como formulário a ser preenchido pelos desenvolvedores, facilitando todo o processo de documentação. Para a verificação de cálculos é também muito útil, toda a etapa que calculamos o gradiente e hessiana foi verificada com LLM's, a partir do nosso desenvolvimento e da pesquisa conseguimos validar os cálculos. Para código, o maior benefício foi o desenvolvimentos de testes, que nos ajudaram a sempre que uma nova funcionalidade era implementada, poderíamos verificar a sua corretude. O resultado que tivemos utilizando as LLM's é muito bom, sem o uso dessas ferramentas teríamos mais dificuldades, o trabalho levaria mais tempo. Mas o nosso aprendizado seria maior? Essas ferramentas nos prejudicam a longo prazo? A resposta é o equilíbrio, sem ele ainda seremos programadores?
-
----
-
-## 5. Distribuição do uso por integrante
+## 4. Distribuição do uso por integrante
 
 | Integrante | Principais usos de IA | Principais verificações feitas |
 |------------|----------------------|--------------------------------|
