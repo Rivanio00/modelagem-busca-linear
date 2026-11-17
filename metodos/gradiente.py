@@ -19,22 +19,24 @@ def gradiente_classico(
     alpha_max: float = 1e6,
 ) -> dict:
     """
-    Executa o Método do Gradiente Clássico
+    Executa o Método do Gradiente Clássico.
     """
     x = p.x0.copy() if x0 is None else np.array(x0, dtype=float).copy()
+
     f_atual = float(p.f(x))
     grad = p.grad(x)
     hess = p.hess(x)
 
     trajetoria_x = [x.copy()]
     trajetoria_f = [f_atual]
+
     status = "Max Iter"
     i = 0
 
     while i < k_limit:
         norma_grad = float(np.linalg.norm(grad))
 
-        # Critério 1: Norma Euclidiana do gradiente <= 1e-5
+        # Critério 1: Norma Euclidiana do gradiente
         if norma_grad <= tol_grad:
             status = "Convergiu (Gradiente)"
             break
@@ -43,9 +45,11 @@ def gradiente_classico(
         d = -grad
 
         # Busca linear
+        try:
             alpha, d = achar_passo(
                 p, x, grad, d, hess,
-                condicao_passo, alpha0, rho, c, sigma1, sigma2, limit, alpha_max
+                condicao_passo, alpha0, rho, c,
+                sigma1, sigma2, limit, alpha_max
             )
         except RuntimeError:
             status = "Falha (Busca Linear)"
@@ -57,6 +61,7 @@ def gradiente_classico(
 
         trajetoria_x.append(x_prox.copy())
         trajetoria_f.append(f_prox)
+
         i += 1
 
         # Critério 1 pós-passo
@@ -65,7 +70,7 @@ def gradiente_classico(
             status = "Convergiu (Gradiente)"
             break
 
-        # Critério 2: Variação relativa de f <= 1e-7
+        # Critério 2: Variação relativa de f
         if abs(f_prox - f_atual) / max(1.0, abs(f_atual)) <= tol_f:
             x, f_atual, grad = x_prox, f_prox, grad_prox
             status = "Convergiu (f)"

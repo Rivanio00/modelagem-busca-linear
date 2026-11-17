@@ -25,6 +25,7 @@ Resumo das principais solicitações feitas aos modelos.
 | 2 | 14/11 | Rivânio | Gemini | Atualizando README.md utilizando o anterior como estrutura base | Enviei o arquivo anterior, referente ao trabalho 1 e pedi pra atualizar seguindo as especificações do novo trabalho | README.md | Verificado pelos dois membros
 | 3 | 15/11 | Rivânio | Gemini | Atualizando conclusao.md utilizando o anterior como estrutura base | Enviei o arquivo anterior, referente ao trabalho 1 e solicitei uma nova estrutura seguindo o que foi pedido nas especificações do trabalho | conclusao.md | Verificado e preenchido pelos membros com os resultados
 | 4 | 15/11 | Rivânio | Gemini | Organizar o manual de uso para adaptações | Desenvolver um manual de uso para adicionar novos testes e alterar existentes | manual_de_uso.md | Corrigido com base no uso nos algoritmos
+| 5 | 17/11 | Wagner | ChatGPT | Organizar a função de cálculo de Polak-Ribiere | Reorganizar a função que calcula o polak-ribiere e integrar ao algoritmo geral do gradiente conjugado | gradiente_conjugado.py | Baseado em um algoritmo anterior feito à mão
 ---
 
 ## 3. Auditoria crítica de erros
