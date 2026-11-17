@@ -1,11 +1,13 @@
 import numpy as np
 from tabulate import tabulate
 from problemas import TP6, TP7, TP12, TP15
-from metodos import gradiente_classico, sr1
+from metodos.gradiente_conjugado import gradiente_conjugado
+from metodos.gradiente import gradiente_classico
+from metodos.sr1 import sr1
 
 try:
-    from metodos import polak_ribiere
-    METODOS = [gradiente_classico, sr1, polak_ribiere]
+    from metodos.gradiente_conjugado import gradiente_conjugado
+    METODOS = [gradiente_classico, sr1, gradiente_conjugado]
 except ImportError:
     METODOS = [gradiente_classico, sr1]
 

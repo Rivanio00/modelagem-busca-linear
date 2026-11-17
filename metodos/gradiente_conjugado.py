@@ -1,13 +1,6 @@
-import os
-import sys
-
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-)
-
 import numpy as np
 from base import Problema
-from problemas import TP6
+
 
 def gradiente_conjugado(
     p: Problema,
@@ -16,14 +9,13 @@ def gradiente_conjugado(
 ) -> dict:
     """
     Executa o Método do Gradiente Conjugado
-    com Polak-Ribiere para atualização da direção
+    com Polak-Ribiere Plus (PR+).
     """
 
     x = p.x0.copy() if x0 is None else np.array(x0, dtype=float).copy()
 
     f_atual = float(p.f(x))
     grad = p.grad(x)
-    hess = p.hess(x)
 
     d = -grad
     n = len(x)
@@ -41,14 +33,18 @@ def gradiente_conjugado(
             status = "Convergiu (Gradiente)"
             break
 
-        A = hess
+        # Curvatura na direção de busca
+        hess = p.hess(x)
+        denominador = float(d.T @ hess @ d)
 
-        # Cálculo do passo
-        denominador = float(d.T @ A @ d)
-
+        # Reinicia a direção caso a curvatura não seja positiva
         if denominador <= 0:
-            status = "Falha (Direção não positiva)"
-            break
+            d = -grad
+            denominador = float(d.T @ hess @ d)
+
+            if denominador <= 0:
+                status = "Falha (Hessiana não positiva)"
+                break
 
         t = -float(grad.T @ d) / denominador
 
@@ -72,7 +68,9 @@ def gradiente_conjugado(
 
         denom_beta = float(grad.T @ grad)
 
-        beta = float(grad_prox.T @ dif_grad) / denom_beta
+        beta_pr = float(grad_prox.T @ dif_grad) / denom_beta
+
+        beta = max(0.0, beta_pr)
 
         d_prox = -grad_prox + beta * d
 
@@ -93,5 +91,3 @@ def gradiente_conjugado(
         "trajetoria_x": trajetoria_x,
         "trajetoria_f": trajetoria_f,
     }
-
-print(gradiente_conjugado(TP6))
