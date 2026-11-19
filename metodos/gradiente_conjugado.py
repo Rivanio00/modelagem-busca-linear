@@ -1,5 +1,6 @@
 import numpy as np
 from base import Problema
+from condicoes import achar_passo
 
 
 def gradiente_conjugado(
@@ -18,7 +19,6 @@ def gradiente_conjugado(
     grad = p.grad(x)
 
     d = -grad
-    n = len(x)
 
     trajetoria_x = [x.copy()]
     trajetoria_f = [f_atual]
@@ -26,27 +26,17 @@ def gradiente_conjugado(
     status = "Max Iter"
     i = 0
 
-    while i < n:
+    while i < 1000:  # limite de itreações
         norma_grad = float(np.linalg.norm(grad))
 
         if norma_grad <= err:
             status = "Convergiu (Gradiente)"
             break
 
-        # Curvatura na direção de busca
-        hess = p.hess(x)
-        denominador = float(d.T @ hess @ d)
-
-        # Reinicia a direção caso a curvatura não seja positiva
-        if denominador <= 0:
+        # Busca linear
+        if float(grad.T @ d) >= 0:
             d = -grad
-            denominador = float(d.T @ hess @ d)
-
-            if denominador <= 0:
-                status = "Falha (Hessiana não positiva)"
-                break
-
-        t = -float(grad.T @ d) / denominador
+        t, d = achar_passo(p, x, grad, d, None, "armijo", 1.0, 0.5, 1e-4, 1e-4, 0.9, 100, 1e6)
 
         x_prox = x + t * d
 
@@ -61,6 +51,12 @@ def gradiente_conjugado(
         if float(np.linalg.norm(grad_prox)) <= err:
             x, f_atual, grad = x_prox, f_prox, grad_prox
             status = "Convergiu (Gradiente)"
+            break
+
+        # Critério de parada por variação relativa de f
+        if abs(f_prox - f_atual) / max(1.0, abs(f_atual)) <= 1e-7:
+            x, f_atual, grad = x_prox, f_prox, grad_prox
+            status = "Convergiu (f)"
             break
 
         # Cálculo de Polak-Ribiere
