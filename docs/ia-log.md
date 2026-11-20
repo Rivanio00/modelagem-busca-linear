@@ -33,11 +33,11 @@ Resumo das principais solicitações feitas aos modelos.
 
 Erro: Ausência de condição de parada por variação da função no algoritmo de Gradiente Conjugado
 
-Integrante que identificou: [Nome do integrante]
+Integrante que identificou: Pedro Wagner
 
 Contexto: Implementação e execução do algoritmo de Gradiente Conjugado para otimização irrestrita, durante a realização da bateria de testes com diferentes problemas e configurações.
 
-Tipo de erro: [ ] Formulação matemática  [ ] Derivada  [X] Bug de implementação  [X] Outro: Ausência de critério de convergência e encerramento inadequado da execução.
+Tipo de erro: Ausência de critério de convergência e encerramento inadequado da execução.
 
 O que o modelo produziu:
 
