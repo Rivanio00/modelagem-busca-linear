@@ -9,7 +9,7 @@ $$
 \nabla^2 f(x) = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}, \quad \text{com número de condicionamento } \kappa(H) = \frac{\lambda_{\max}}{\lambda_{\min}} = 2
 $$
 
-Por ser uma função **estritamente convexa**, existe um único ponto estacionário em $\mathbb{R}^2$, o qual corresponde ao minimizador global $x^* = (1, 0)^T$ com $f(x^*) = -0{,}5$. Geometricamente, sua bacia de atração abrange todo o espaço $\mathbb{R}^2$ sem barreiras ou regiões de repulsão. Consequentemente, tanto partindo do ponto padrão $x_A^0 = (-4, -2)^T$ quanto do ponto refletido $x_B^0 = (4, 2)^T$, todos os algoritmos convergem rigorosamente para a mesma solução ótima (`Convergiu (Gradiente)` com $\|\nabla f(x^*)\|_2 = 0$), exigindo apenas **2 iterações** no Gradiente Clássico e no SR1, e **4 e 2 iterações** no Gradiente Conjugado ($\text{PR}^+$).
+Por ser uma função **estritamente convexa**, existe um único ponto estacionário em $\mathbb{R}^2$, o qual corresponde ao minimizador global $x^* = (1, 0)^T$ com $f(x^*) = -0{,}5$. Geometricamente, sua bacia de atração abrange todo o espaço $\mathbb{R}^2$ sem barreiras ou regiões de repulsão. Consequentemente, tanto partindo do ponto padrão $x_A^0 = (-4, -2)^T$ quanto do ponto refletido $x_B^0 = (4, 2)^T$, todos os algoritmos convergem rigorosamente para a mesma solução ótima (`Convergiu (Gradiente)` com $\|\nabla f(x^*)\|_2 = 0$), exigindo apenas **2 iterações** no Gradiente Clássico e no SR1, e **4 e 2 iterações** no Gradiente Conjugado com Polak-Ribiere ($\text{PR}^+$).
 
 ### 1.2 Geometria nos Problemas Não-Convexos e Mal-Condicionados (TP7, TP12 e TP15)
 
